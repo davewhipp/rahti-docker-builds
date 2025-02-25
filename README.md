@@ -23,7 +23,7 @@ The steps below present an overview of how to build a Docker image on the CSC's 
     - Note that if you have more than one project, you may need to change the active project using the `oc project <project name>` command
 6. Create the space for building: `oc new-build --to=my-hello-image:devel --name=my-hello --binary` where `my-hello-image` should be the name of the Docker image to create, `devel` is the tag, and `my-hello` is the name used when building (I think). Rename as appropriate.
 7. Copy the dockerfile to a directory (with all other needed files and nothing else) as `Dockerfile`
-8. Build the image by changing into that directory and running `oc start-build my-hello --from-dir=./ -F 
+8. Build the image by changing into that directory and running `oc start-build my-hello --from-dir=./ -F`
     - If the build fails, it may be necessary to bump up the resources by editing the yaml BuildConfig file as shown below in the section "Build resources"
 9. The new image will be available as `image-registry.apps.2.rahti.csc.fi/<project-name>/my-hello-image:devel`
 10. Allow anonymous image access: `oc policy add-role-to-user registry-viewer system:anonymous -n <project>`
