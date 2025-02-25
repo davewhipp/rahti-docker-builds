@@ -26,7 +26,7 @@ The steps below present an overview of how to build a Docker image on the CSC's 
 8. Build the image by changing into that directory and running `oc start-build my-hello --from-dir=./ -F 
     - If the build fails, it may be necessary to bump up the resources by editing the yaml BuildConfig file as shown below in the section "Build resources"
 9. The new image will be available as `image-registry.apps.2.rahti.csc.fi/<project-name>/my-hello-image:devel`
-10. Allow anonymous image access: `oc policy add-role-to-user registry-viewer system:anonymous -n <project>
+10. Allow anonymous image access: `oc policy add-role-to-user registry-viewer system:anonymous -n <project>`
 11. Create/update Noppe workspace to use the new image at location from point 9 above.
 12. Test on Noppe!
 
