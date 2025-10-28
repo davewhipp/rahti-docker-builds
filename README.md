@@ -22,7 +22,10 @@ The steps below present an overview of how to build a Docker image on the CSC's 
 5. Log in to Rahti using open shift (e.g., `oc login --token=... --server=https://api.2.rahti.csc.fi:6443`). You can get the command by clicking on your name on the Rahti website and then "Copy login command"
     - Note that if you have more than one project, you may need to change the active project using the `oc project <project name>` command. For example, `oc project geo-python`.
 6. Create the space for building: `oc new-build --to=my-hello-image:devel --name=my-hello --binary` where `my-hello-image` should be the name of the Docker image to create, `devel` is the tag, and `my-hello` is the name used when building (I think). Rename as appropriate. For example, `oc new-build --to=geo-python:2025.0 --name=geo-python --binary`
-7. Copy the dockerfile to a directory (with all other needed files and nothing else) as `Dockerfile`
+
+    - Thus, when updating an image with a new tag, both the tag and build name should be updated. For example, `oc new-build --to=geo-python:2025.1 --name=geo-python1 --binary`
+
+8. Copy the dockerfile to a directory (with all other needed files and nothing else) as `Dockerfile`
 9. Build the image by changing into that directory and running `oc start-build my-hello --from-dir=./ -F`. For example, `oc start-build geo-python --from-dir=./ -F`
     - If the build fails, it may be necessary to bump up the resources by editing the yaml BuildConfig file as shown below in the section "Build resources". See https://docs.csc.fi/cloud/rahti/images/creating/#troubleshooting. I got things to work by just copying and pasting the example resource info below (delete the curly braces that are there by default in the build resource yaml file).
 10. The new image will be available as `image-registry.apps.2.rahti.csc.fi/<project-name>/my-hello-image:devel`. For example, `image-registry.apps.2.rahti.csc.fi/geo-python/geo-python:2025.0`.
